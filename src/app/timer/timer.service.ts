@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Subject } from "rxjs/Subject";
+
 @Injectable()
 export class TimerService {
 
@@ -7,6 +9,8 @@ export class TimerService {
     public countdown:number = 0;
     public pause:boolean = true;
     private init:number;
+    private countdownEndSource = new Subject<void>();
+    public countdownEnd$ = this.countdownEndSource.asObservable();
 
     constructor() {}
 
@@ -54,7 +58,8 @@ export class TimerService {
     private processCountdown(){
         if(this.countdown == 0){
           // this.onComplete.emit();
-          console.log("--countdown end--");
+          this.countdownEndSource.next();
+          //console.log("--countdown end--");
         }
         else{
           this.doCountdown();
