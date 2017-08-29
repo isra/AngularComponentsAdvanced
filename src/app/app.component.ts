@@ -10,7 +10,7 @@ export class AppComponent {
   constructor() { }
 
   showLogCountdown():void {
-    console.log("--Countdown is finished");
+    //console.log("--Countdown is finished");
   }
 
 }
