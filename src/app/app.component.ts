@@ -6,11 +6,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  
+  private timers:number[] = [3];
+  private time:number = 0;
 
-  constructor() { }
+  private alertViewIsActive: boolean = false;
+  
+
+  constructor() { 
+    this.alertViewIsActive = false;
+  }
 
   showLogCountdown():void {
     //console.log("--Countdown is finished");
+  }
+
+  showAlertView() {
+    this.alertViewIsActive = true;
+  }
+
+  hideAlertView() {
+    this.alertViewIsActive = false;
+  }
+
+  addTimer():void {
+    this.timers.push(this.time);
+    this.hideAlertView();
   }
 
 }
