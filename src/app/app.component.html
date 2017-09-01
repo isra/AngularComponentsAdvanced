@@ -1,9 +1,14 @@
 <div>
-    <h1>Timers</h1>
+    <app-tabs>
+        <app-tab title="Timer">
+            <app-timer *ngFor="let t of timers" init="{{t}}" (onComplete)="showAlertViewCountdownFinished()"></app-timer>
+            <button class="add" (click)="showAlertView();time=0">+</button>
+        </app-tab>
+        <app-tab title="Crono">Crono. Nothing implements</app-tab>
+        <app-tab title="Other">Other. Nothing implements</app-tab>
+    </app-tabs>
 
-    <app-timer *ngFor="let t of timers" init="{{t}}" (onComplete)="showAlertViewCountdownFinished()"></app-timer>
 
-    <button class="add" (click)="showAlertView();time=0">+</button>
 
     <app-alert-view [hidden]="!alertViewIsActive">
         <div header> Add new timer </div>
