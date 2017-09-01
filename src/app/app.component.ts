@@ -11,10 +11,10 @@ export class AppComponent {
   private time:number = 0;
 
   private alertViewIsActive: boolean = false;
+  private alertViewCountdownFinished: boolean = false;
   
 
-  constructor() { 
-    this.alertViewIsActive = false;
+  constructor() {     
   }
 
   showLogCountdown():void {
@@ -32,6 +32,14 @@ export class AppComponent {
   addTimer():void {
     this.timers.push(this.time);
     this.hideAlertView();
+  }
+
+  showAlertViewCountdownFinished() {
+    this.alertViewCountdownFinished = true;
+  }
+
+  hideAlertViewCountdownFinished() {
+    this.alertViewCountdownFinished = false;
   }
 
 }
