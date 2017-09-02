@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Tab } from "./tab.interface";
 import { TabsComponent } from '../tabs/tabs.component';
 
@@ -9,13 +9,21 @@ import { TabsComponent } from '../tabs/tabs.component';
 })
 export class TabComponent implements OnInit, Tab {
 
+  @Output() onClick: EventEmitter<void> = new EventEmitter<void>();
   @Input() title:string;
-  public isActive:boolean = false;
+  public isActive:boolean = false;  
 
-  constructor(private tabs: TabsComponent) { }
+  //constructor(private tabs: TabsComponent) { }
+  constructor() {    
+
+   }
 
   ngOnInit() {
-    this.tabs.addTab(this);
+    //this.tabs.addTab(this);
+  }
+
+  clickOnTab():void{
+    this.onClick.emit();
   }
 
 }
