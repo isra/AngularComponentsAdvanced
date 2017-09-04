@@ -31,8 +31,9 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
     this.cdRef.detectChanges();
 
     console.log(this.timerInput);
+    //this.timerInput.nativeElement.placeholder = "set time";
+    this.timerInput.nativeElement.setAttribute("placeholder", "enter seconds");
     this.timerInput.nativeElement.classList.add('input-time');
-    this.timerInput.nativeElement.placeholder = "set time";
     
   }
   
