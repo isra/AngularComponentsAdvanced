@@ -1,5 +1,6 @@
 import { Component, ViewChild, ViewChildren, QueryList, 
-  AfterViewInit ,AfterContentInit, ChangeDetectorRef, ElementRef } from '@angular/core';
+  AfterViewInit ,AfterContentInit, ChangeDetectorRef, 
+  ElementRef, Renderer2 } from '@angular/core';
 
 import { SimpleAlertViewComponent } from './simple-alert-view/simple-alert-view.component';
 
@@ -22,6 +23,14 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {    
+    
+    console.log(this.timerInput);
+    //this.timerInput.nativeElement.placeholder = "set time";
+    //this.timerInput.nativeElement.setAttribute("placeholder", "enter seconds");
+    //this.timerInput.nativeElement.classList.add('input-time');
+    this.renderer.addClass(this.timerInput.nativeElement, 'input-time');
+    this.renderer.setAttribute(this.timerInput.nativeElement, 'placeholder', 'enter seconds');
+    
     this.alerts.forEach(alert => {
       if (!alert.title) {        
         alert.title = "Hello";
@@ -29,16 +38,10 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
       }      
     });
     this.cdRef.detectChanges();
-
-    console.log(this.timerInput);
-    //this.timerInput.nativeElement.placeholder = "set time";
-    this.timerInput.nativeElement.setAttribute("placeholder", "enter seconds");
-    this.timerInput.nativeElement.classList.add('input-time');
-    
   }
   
 
-  constructor(private cdRef:ChangeDetectorRef) {     
+  constructor(private cdRef:ChangeDetectorRef, private renderer: Renderer2) {     
   }
 
   showLogCountdown():void {
@@ -48,7 +51,8 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   showAlertView() {
     this.alertViewIsActive = true;
     setTimeout(()=>{
-      this.timerInput.nativeElement.focus();
+      //this.timerInput.nativeElement.focus();
+      this.renderer.selectRootElement(this.timerInput.nativeElement).focus();
     });
   }
 
