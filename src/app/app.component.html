@@ -11,7 +11,7 @@
     <app-alert-view [hidden]="!alertViewIsActive">
         <div header> Add new timer </div>
         <label>Set the number of seconds for your timer</label>
-        <input [(ngModel)]="time" type="number">
+        <input [(ngModel)]="time" type="number" #timerInput>
         <button (click)="hideAlertView()" class="cancel-button">Cancel</button>
         <button (click)="addTimer()">Ok</button>
     </app-alert-view>

@@ -1,4 +1,5 @@
-import { Component, ViewChildren, QueryList, AfterViewInit ,AfterContentInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ViewChildren, QueryList, 
+  AfterViewInit ,AfterContentInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 
 import { SimpleAlertViewComponent } from './simple-alert-view/simple-alert-view.component';
 
@@ -13,14 +14,14 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   private time:number = 0;
 
   @ViewChildren(SimpleAlertViewComponent) public alerts:QueryList<SimpleAlertViewComponent>;
+  @ViewChild('timerInput') public timerInput: ElementRef;
   
   private alertViewIsActive: boolean = false;
   
   ngAfterContentInit(): void {
   }
   
-  ngAfterViewInit(): void {
-    console.log(this.alerts);
+  ngAfterViewInit(): void {    
     this.alerts.forEach(alert => {
       if (!alert.title) {        
         alert.title = "Hello";
@@ -28,6 +29,11 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
       }      
     });
     this.cdRef.detectChanges();
+
+    console.log(this.timerInput);
+    this.timerInput.nativeElement.classList.add('input-time');
+    this.timerInput.nativeElement.placeholder = "set time";
+    
   }
   
 
@@ -40,6 +46,9 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
 
   showAlertView() {
     this.alertViewIsActive = true;
+    setTimeout(()=>{
+      this.timerInput.nativeElement.focus();
+    });
   }
 
   hideAlertView() {
