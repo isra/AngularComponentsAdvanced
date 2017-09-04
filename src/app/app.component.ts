@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   
-  private timers:number[] = [3];
+  private timers:number[] = [3,15,20];
   private time:number = 0;
 
   private alertViewIsActive: boolean = false;
