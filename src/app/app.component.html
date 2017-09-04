@@ -16,11 +16,12 @@
         <button (click)="addTimer()">Ok</button>
     </app-alert-view>
 
-    <app-alert-view [hidden]="!alertViewCountdownFinished">
+    <!--app-alert-view [hidden]="!alertViewCountdownFinished">
         <div header>Countdown Finish</div>
         <div>You countdown has finished</div>
         <button (click)="hideAlertViewCountdownFinished()">Ok</button>
-    </app-alert-view>
+    </app-alert-view-->
 
+    <app-simple-alert-view title="Timer Ended" message="Your countdown has finished"></app-simple-alert-view>
     <app-simple-alert-view></app-simple-alert-view>
 </div>

@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterContentInit } from '@angular/core';
+import { Component, ViewChildren, QueryList, AfterViewInit ,AfterContentInit, ChangeDetectorRef } from '@angular/core';
 
 import { SimpleAlertViewComponent } from './simple-alert-view/simple-alert-view.component';
 
@@ -7,25 +7,31 @@ import { SimpleAlertViewComponent } from './simple-alert-view/simple-alert-view.
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterContentInit {
+export class AppComponent implements AfterContentInit, AfterViewInit {
   
   private timers:number[] = [3,15,20];
   private time:number = 0;
 
-  @ViewChild(SimpleAlertViewComponent) public alert:SimpleAlertViewComponent;
+  @ViewChildren(SimpleAlertViewComponent) public alerts:QueryList<SimpleAlertViewComponent>;
   
   private alertViewIsActive: boolean = false;
-  private alertViewCountdownFinished: boolean = false;
-
+  
   ngAfterContentInit(): void {
-    console.log(this.alert);
-    this.alert.show();
-    this.alert.title = "Hello";
-    this.alert.message = "World";
+  }
+  
+  ngAfterViewInit(): void {
+    console.log(this.alerts);
+    this.alerts.forEach(alert => {
+      if (!alert.title) {        
+        alert.title = "Hello";
+        alert.message = "World";
+      }      
+    });
+    this.cdRef.detectChanges();
   }
   
 
-  constructor() {     
+  constructor(private cdRef:ChangeDetectorRef) {     
   }
 
   showLogCountdown():void {
@@ -46,11 +52,9 @@ export class AppComponent implements AfterContentInit {
   }
 
   showAlertViewCountdownFinished() {
-    this.alertViewCountdownFinished = true;
+    this.alerts.first.show()
   }
 
-  hideAlertViewCountdownFinished() {
-    this.alertViewCountdownFinished = false;
-  }
+  
 
 }
