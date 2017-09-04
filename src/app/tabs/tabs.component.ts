@@ -23,7 +23,7 @@ export class TabsComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngAfterContentInit(): void {    
-    console.log(this.tabs);    
+    //console.log(this.tabs);    
     this.tabs.forEach(tab => {
       let subscription = tab.onClick.subscribe(()=>{
         console.log(`select ${tab.title} selected`);
