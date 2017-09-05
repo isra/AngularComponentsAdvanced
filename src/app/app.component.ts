@@ -35,7 +35,8 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
       if (!alert.title) {        
         alert.title = "Hello";
         alert.message = "World";
-      }      
+      }
+      console.log(alert);
     });
     this.cdRef.detectChanges();
   }

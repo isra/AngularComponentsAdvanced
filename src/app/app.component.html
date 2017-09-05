@@ -22,6 +22,14 @@
         <button (click)="hideAlertViewCountdownFinished()">Ok</button>
     </app-alert-view-->
 
-    <app-simple-alert-view title="Timer Ended" message="Your countdown has finished"></app-simple-alert-view>
-    <app-simple-alert-view></app-simple-alert-view>
+    <ng-template #timerEndedTemplate let-message let-title="title">
+        <app-simple-alert-view [title]="title" [message]="message"></app-simple-alert-view>
+    </ng-template>
+
+    <ng-container [ngTemplateOutlet]="timerEndedTemplate" [ngTemplateOutletContext]="{title: 'Game over', $implicit:'timer ended'}"></ng-container>
+    <ng-container [ngTemplateOutlet]="timerEndedTemplate"></ng-container>
+    <ng-container [ngTemplateOutlet]="timerEndedTemplate"></ng-container>
+    <ng-container [ngTemplateOutlet]="timerEndedTemplate"></ng-container>
+
+
 </div>
