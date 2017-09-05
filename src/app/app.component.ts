@@ -22,6 +22,12 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   ngAfterContentInit(): void {
     const alertFactory = this.resolver.resolveComponentFactory(SimpleAlertViewComponent);
     this.simpleAlert = this.alertContainer.createComponent(alertFactory);
+    this.simpleAlert.instance.title = "Timer Ended";
+    this.simpleAlert.instance.message = "Your coundown has finished";
+    this.simpleAlert.instance.onDismiss.subscribe(()=> {
+      console.log('dismissed');
+    });
+    console.log(this.simpleAlert.instance);
   }
   
   ngAfterViewInit(): void {    
