@@ -19,15 +19,7 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   
   private alertViewIsActive: boolean = false;
   
-  ngAfterContentInit(): void {
-    const alertFactory = this.resolver.resolveComponentFactory(SimpleAlertViewComponent);
-    this.simpleAlert = this.alertContainer.createComponent(alertFactory);
-    this.simpleAlert.instance.title = "Timer Ended";
-    this.simpleAlert.instance.message = "Your coundown has finished";
-    this.simpleAlert.instance.onDismiss.subscribe(()=> {
-      console.log('dismissed');
-    });
-    console.log(this.simpleAlert.instance);
+  ngAfterContentInit(): void {    
   }
   
   ngAfterViewInit(): void {    
@@ -63,6 +55,15 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
 
   showAlertViewCountdownFinished() {
     // this.alerts.first.show()
+    const alertFactory = this.resolver.resolveComponentFactory(SimpleAlertViewComponent);
+    this.simpleAlert = this.alertContainer.createComponent(alertFactory);
+    this.simpleAlert.instance.title = "Timer Ended";
+    this.simpleAlert.instance.message = "Your coundown has finished";
+    this.simpleAlert.instance.onDismiss.subscribe(()=> {
+      console.log('dismissed');
+      this.simpleAlert.destroy();
+    });
+    console.log(this.simpleAlert.instance);
     this.simpleAlert.instance.show();
   }
 
